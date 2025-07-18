@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+	
+	environment {
+        // IMAGE_NAME = ""
+        // CONTAINER_NAME = "ats-data"
+        GIT_REPO = "https://github.com/CloudNexus-Org/ATS-Backend.git"  // Update this!
+       	BRANCH = "main"
+        CREDENTIALS_ID = "github-creds"
+    }	
+
+    stages {
+        stage('Clone Backend') {
+            steps {
+                git url: "${GIT_REPO}", branch: "${BRANCH}", credentialsId: "{CREDENTIALS_ID}"
+            }
+        }
+
+        stage('Stop Existing Services') {
+            steps {
+                sh 'docker compose down || true'
+            }
+        }
+
+        stage('Build and Start Services') {
+            steps {
+                sh '''
+                    docker compose build
+                    docker compose up -d
+                '''
+            }
+        }
+    }
+
+    post {
+        success { echo "✅ Backend deployed successfully!" }
+        failure { echo "❌ Backend deployment failed!" }
+    }
+}
