@@ -101,13 +101,6 @@ This project is for demonstration and educational purposes only.
 
 ---
 
-## 🙌 Credits
-
-Project developed and maintained by **Tabasum Khan**  
-Feel free to connect on [LinkedIn](https://www.linkedin.com/in/tabasum-khan-devops/) 💼
-
----
-
 ## ✅ Status
 
 🟢 **Project Completed**
